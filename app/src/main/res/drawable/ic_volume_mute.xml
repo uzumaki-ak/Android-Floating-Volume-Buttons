@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_volume_mute.xml - Vector icon for mute button
+
+    Shows a speaker with an X through it to indicate muted state.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Speaker shape -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M7,9v6h4l5,5V4l-5,5H7z" />
+
+    <!-- X mark (diagonal lines crossing out the speaker) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16.5,12c0,-1.77 -1.02,-3.29 -2.5,-4.03v2.21l2.45,2.45c0.03,-0.2 0.05,-0.41 0.05,-0.63z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M19,12c0,0.94 -0.2,1.82 -0.54,2.64l1.51,1.51C20.63,14.91 21,13.5 21,12c0,-4.28 -2.99,-7.86 -7,-8.77v2.06c2.89,0.86 5,3.54 5,6.71z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M4.27,3L3,4.27L9,10.27v0.28l-4.18,4.18c-0.29,0.29 -0.29,0.77 0,1.06c0.29,0.29 0.77,0.29 1.06,0L10,11.66l8.73,8.73L20,19.19L4.27,3z" />
+</vector>

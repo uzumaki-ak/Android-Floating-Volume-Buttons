@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    colors.xml - Color definitions for the app
+
+    This file defines all colors used throughout the app.
+    Using named colors makes it easy to change the app's
+    color scheme in one place.
+
+    For beginners: Think of this as a color palette for your app.
+    Instead of using hex codes everywhere, you define colors here
+    and reference them by name.
+-->
+<resources>
+    <!-- Primary brand colors -->
+    <color name="primary">#1976D2</color>          <!-- Blue - main theme color -->
+    <color name="primary_dark">#1565C0</color>     <!-- Darker blue -->
+    <color name="primary_light">#42A5F5</color>    <!-- Lighter blue -->
+    <color name="accent">#FF4081</color>           <!-- Pink accent color -->
+
+    <!-- Background colors -->
+    <color name="background">#F5F5F5</color>       <!-- Light gray background -->
+    <color name="surface">#FFFFFF</color>          <!-- White surface (cards, etc.) -->
+
+    <!-- Text colors -->
+    <color name="text_primary">#212121</color>     <!-- Dark gray (main text) -->
+    <color name="text_secondary">#757575</color>   <!-- Medium gray (secondary text) -->
+
+    <!-- Status colors -->
+    <color name="green_500">#4CAF50</color>        <!-- Green (success/active) -->
+    <color name="red_500">#F44336</color>          <!-- Red (error/inactive) -->
+    <color name="orange_500">#FF9800</color>       <!-- Orange (warning) -->
+
+    <!-- Common colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Floating button colors -->
+    <color name="floating_button">#1976D2</color>  <!-- Button background -->
+    <color name="floating_button_pressed">#1565C0</color>  <!-- When pressed -->
+</resources>

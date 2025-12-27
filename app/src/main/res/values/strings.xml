@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    strings.xml - String resources for the app
+
+    All text displayed in the app should be defined here.
+    Benefits:
+    - Easy to translate to other languages
+    - Change text without modifying code
+    - Reuse strings across multiple screens
+
+    For beginners: This is like a dictionary of all text in your app.
+    Instead of hardcoding text in layouts, you reference strings from here.
+-->
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Volume Button Fix</string>
+
+    <!-- Main Activity Strings -->
+    <string name="app_description">Replace broken physical buttons with floating on-screen controls</string>
+    <string name="start_service">Start Floating Buttons</string>
+    <string name="stop_service">Stop Floating Buttons</string>
+    <string name="settings">Settings</string>
+    <string name="status_active">Status: Active ✓\n\nFloating buttons are visible on your screen.</string>
+    <string name="status_inactive">Status: Inactive\n\nTap the button below to activate floating buttons.</string>
+    <string name="info_text">The floating buttons will appear over all apps and can be dragged to any position on screen.</string>
+
+    <!-- Floating Button Content Descriptions -->
+    <string name="volume_up">Volume Up</string>
+    <string name="volume_down">Volume Down</string>
+    <string name="mute">Mute/Unmute</string>
+    <string name="lock_screen">Lock Screen</string>
+
+    <!-- Settings Activity Strings -->
+    <string name="permissions_title">Permissions</string>
+    <string name="overlay_permission_status">Overlay Permission: Checking…</string>
+    <string name="device_admin_status">Device Administrator: Checking…</string>
+    <string name="notification_permission_status">Notification Permission: Checking…</string>
+    <string name="manage_permissions">Manage Permissions</string>
+
+    <!-- App Info -->
+    <string name="app_info_title">About</string>
+    <string name="about_app">Volume Button Fix v1.0\n\nThis app provides floating on-screen buttons to replace broken physical volume and power buttons.\n\nFeatures:\n• Volume Up/Down control\n• Mute/Unmute audio\n• Lock screen\n• Draggable buttons\n• Works system-wide\n\nNo root access required.\nWorks on Android 8.0 and above.</string>
+
+
+    <string name="overlay_permission_explanation">This app needs permission to display floating buttons over other apps. This is the core functionality of the app.</string>
+    <string name="device_admin_explanation">Device Administrator permission is required to lock your screen programmatically. This is optional but recommended.</string>
+    <string name="notification_permission_explanation">Notification permission is required to show a persistent notification while the service is running.</string>
+
+
+    <string name="notification_title">Floating Buttons Active</string>
+    <string name="notification_text">Tap to open app</string>
+
+
+    <string name="service_started">Floating buttons activated!</string>
+    <string name="service_stopped">Floating buttons deactivated</string>
+    <string name="permission_required">Permission required to start service</string>
+    <string name="overlay_permission_granted">Overlay permission granted!</string>
+    <string name="overlay_permission_denied">Overlay permission denied. App cannot function without it.</string>
+    <string name="device_admin_enabled">Device admin enabled! Screen lock will work.</string>
+    <string name="device_admin_not_enabled">Device admin not enabled. Screen lock button won\'t work.</string>
+    <string name="screen_lock_failed">Failed to lock screen</string>
+    <string name="volume_change_failed">Failed to change volume</string>
+</resources>

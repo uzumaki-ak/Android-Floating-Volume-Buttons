@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    themes.xml - Theme definitions for the app (Light mode)
+
+    This defines the visual style of the entire app:
+    - Colors for different UI elements
+    - Status bar appearance
+    - Action bar style
+    - Button styles
+    - etc.
+
+    For beginners: A theme is like a stylesheet for your entire app.
+    It controls the colors, fonts, and appearance of all UI components.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme - Material Design 3 -->
+    <style name="Theme.VolumeButtonFix" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color -->
+        <!-- Used for: App bar, buttons, selected items -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <!-- Used for: Floating action buttons, sliders, checkboxes -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+
+        <!-- Status bar color (top bar with time/battery) -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+
+        <!-- Navigation bar color (bottom bar with back/home buttons) -->
+        <item name="android:navigationBarColor">@color/background</item>
+
+        <!-- Light status bar icons (for dark status bar) -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <!-- Action bar (if used) -->
+        <item name="actionBarStyle">@style/Widget.VolumeButtonFix.ActionBar</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.VolumeButtonFix.ActionBar</item>
+    </style>
+
+    <!-- Custom Action Bar Style -->
+    <style name="Widget.VolumeButtonFix.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/primary</item>
+        <item name="titleTextStyle">@style/TextAppearance.VolumeButtonFix.ActionBar.Title</item>
+    </style>
+
+    <!-- Action Bar Theme Overlay -->
+    <style name="ThemeOverlay.VolumeButtonFix.ActionBar" parent="ThemeOverlay.Material3.Dark">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <!-- Action Bar Title Text Style -->
+    <style name="TextAppearance.VolumeButtonFix.ActionBar.Title" parent="TextAppearance.Material3.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

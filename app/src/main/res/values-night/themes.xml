@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    themes.xml (Night Mode) - Dark theme for the app
+
+    This is the dark mode version of the theme.
+    Android automatically uses this when:
+    - User enables dark mode in system settings
+    - Battery saver is on
+    - Time-based dark mode is active
+
+    For beginners: This is the dark version of your app theme.
+    It uses darker colors to reduce eye strain in low light.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme (Dark) - Material Design 3 -->
+    <style name="Theme.VolumeButtonFix" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary brand color (slightly lighter for dark mode) -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Dark background colors -->
+        <item name="android:colorBackground">#121212</item>
+        <item name="colorSurface">#1E1E1E</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- Status bar color (dark) -->
+        <item name="android:statusBarColor">#000000</item>
+
+        <!-- Navigation bar color (dark) -->
+        <item name="android:navigationBarColor">#121212</item>
+
+        <!-- Dark status bar icons (for light status bar) -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <!-- Action bar (if used) -->
+        <item name="actionBarStyle">@style/Widget.VolumeButtonFix.ActionBar.Dark</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.VolumeButtonFix.ActionBar.Dark</item>
+    </style>
+
+    <!-- Dark Mode Action Bar Style -->
+    <style name="Widget.VolumeButtonFix.ActionBar.Dark" parent="Widget.Material3.ActionBar.Solid">
+        <item name="background">@color/primary_dark</item>
+        <item name="titleTextStyle">@style/TextAppearance.VolumeButtonFix.ActionBar.Title</item>
+    </style>
+
+    <!-- Dark Mode Action Bar Theme Overlay -->
+    <style name="ThemeOverlay.VolumeButtonFix.ActionBar.Dark" parent="ThemeOverlay.Material3.Dark">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <!-- Action Bar Title Text Style (same as light mode) -->
+    <style name="TextAppearance.VolumeButtonFix.ActionBar.Title" parent="TextAppearance.Material3.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

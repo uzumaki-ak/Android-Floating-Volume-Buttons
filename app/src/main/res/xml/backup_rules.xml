@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    backup_rules.xml - Full backup rules for Android 6-11
+
+    Similar to data_extraction_rules.xml but for older Android versions.
+    Defines what data should be included in automatic backups.
+
+    For beginners: This is the backup configuration for Android 6-11.
+    The newer data_extraction_rules.xml handles Android 12+.
+
+    Location: app/src/main/res/xml/backup_rules.xml
+-->
+<full-backup-content>
+    <!-- Include shared preferences (app settings) -->
+    <include domain="sharedpref" path="." />
+
+    <!-- Include app databases (if any) -->
+    <include domain="database" path="." />
+
+    <!-- Include app files -->
+    <include domain="file" path="." />
+</full-backup-content>

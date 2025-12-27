@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    device_admin.xml - Device Administrator policy definition
+
+    This file declares what device admin capabilities our app needs.
+    In our case, we only need the "force-lock" capability to lock the screen.
+
+    For beginners: Device Administrator is a special Android permission
+    that allows apps to perform system-level actions. This XML file
+    tells Android exactly what capabilities we need.
+
+    Location: app/src/main/res/xml/device_admin.xml
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <!--
+            force-lock policy: Allows app to lock the device screen
+            This is the only policy we need for our screen lock functionality
+        -->
+        <force-lock />
+    </uses-policies>
+</device-admin>

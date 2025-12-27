@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    floating_button_layout.xml - Layout for the floating overlay buttons
+
+    This defines the appearance of the floating buttons that appear
+    over all other apps. Contains 4 buttons arranged vertically:
+    - Volume Up
+    - Volume Down
+    - Mute
+    - Lock Screen
+
+    For beginners: This is the actual floating widget users will see
+    and interact with on their screen.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/button_background"
+    android:padding="8dp"
+    android:elevation="16dp">
+
+    <!-- Volume Up Button -->
+    <ImageButton
+        android:id="@+id/volumeUpButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/volume_up"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_volume_up"
+        app:tint="@color/white" />
+
+    <!-- Volume Down Button -->
+    <ImageButton
+        android:id="@+id/volumeDownButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/volume_down"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_volume_down"
+        app:tint="@color/white" />
+
+    <!-- Mute Button -->
+    <ImageButton
+        android:id="@+id/muteButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/mute"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_volume_mute"
+        app:tint="@color/white" />
+
+    <!-- Lock Screen Button -->
+    <ImageButton
+        android:id="@+id/lockButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/lock_screen"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_lock"
+        app:tint="@color/white" />
+
+</LinearLayout>

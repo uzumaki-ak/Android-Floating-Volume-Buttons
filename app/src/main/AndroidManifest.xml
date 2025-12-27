@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AndroidManifest.xml - The central configuration file for your Android app
+    This file declares:
+    - App permissions
+    - Components (Activities, Services, Receivers)
+    - Hardware/software requirements
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        PERMISSIONS: What system features the app needs access to
+        These will be requested from the user at runtime
+    -->
+
+    <!-- Required to draw floating windows over other apps -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Required to run a persistent background service -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- Required for Android 9+ to use foreground services -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- Required to modify system audio volume -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <!-- Required to trigger haptic feedback -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Required for device administrator (to lock screen) -->
+    <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+
+    <!-- Required to receive boot completed event (auto-start service) -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Required for posting notifications on Android 13+ -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.VolumeButtonFix"
+        tools:targetApi="31">
+
+        <!--
+            MAIN ACTIVITY: The entry point of the app
+            This screen opens when user taps the app icon
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.VolumeButtonFix">
+            <intent-filter>
+                <!-- Makes this activity the app launcher -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            SETTINGS ACTIVITY: Configuration screen
+            Opens when user wants to change app settings
+        -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings"
+            android:parentActivityName=".MainActivity" />
+
+        <!--
+            OVERLAY SERVICE: Background service that displays floating buttons
+            Runs continuously while the floating buttons are active
+        -->
+        <service
+            android:name=".OverlayService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <!-- Describes why this foreground service is needed -->
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="accessibility_overlay" />
+        </service>
+
+        <!--
+            DEVICE ADMIN RECEIVER: Enables screen lock functionality
+            Grants app permission to lock the device screen
+        -->
+        <receiver
+            android:name=".ScreenLockHelper$DeviceAdminReceiver"
+            android:exported="true"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+            BOOT RECEIVER: Auto-starts service after device reboot
+            Ensures floating buttons start automatically when phone turns on
+        -->
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

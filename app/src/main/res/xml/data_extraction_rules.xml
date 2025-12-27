@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    data_extraction_rules.xml - Rules for Android 12+ data transfer
+
+    This file defines rules for transferring app data when:
+    - User upgrades to a new device
+    - Cloud backup/restore
+    - Device-to-device transfer
+
+    For beginners: This tells Android what app data should be backed up.
+    We include everything since we don't store sensitive data.
+
+    Location: app/src/main/res/xml/data_extraction_rules.xml
+    Required for Android 12+ (API 31+)
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Include all app data in cloud backups -->
+        <include domain="sharedpref" path="." />
+        <include domain="database" path="." />
+        <include domain="file" path="." />
+    </cloud-backup>
+
+    <device-transfer>
+        <!-- Include all app data in device-to-device transfers -->
+        <include domain="sharedpref" path="." />
+        <include domain="database" path="." />
+        <include domain="file" path="." />
+    </device-transfer>
+</data-extraction-rules>

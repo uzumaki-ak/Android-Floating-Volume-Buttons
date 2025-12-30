@@ -1,135 +1,245 @@
 package com.volumebuttonfix
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.provider.Settings
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 /**
- * SettingsActivity - App settings and configuration screen
+ * FIXED SettingsActivity - Settings now apply in real-time!
  *
- * This screen shows app information and settings:
- * - Permission status
- * - App version
- * - Option to manage permissions
- * - About information
- *
- * For beginners: This is a simple screen that shows useful information
- * and lets users manage app permissions.
+ * Path: app/src/main/java/com/volumebuttonfix/SettingsActivity.kt
+ * Action: REPLACE ENTIRE FILE
  */
 class SettingsActivity : AppCompatActivity() {
 
-    // UI elements
-    private lateinit var overlayStatusText: TextView
-    private lateinit var deviceAdminStatusText: TextView
-    private lateinit var notificationStatusText: TextView
-    private lateinit var managePermissionsButton: Button
-
-    // Permission helper
+    private lateinit var prefsManager: PreferencesManager
+    private lateinit var usageStatsManager: UsageStatsManager
     private lateinit var permissionHelper: PermissionHelper
 
-    /**
-     * onCreate - Called when activity is created
-     * Set up the UI and display current status
-     */
+    private val buttonSwitches = mutableMapOf<PreferencesManager.ButtonType, SwitchMaterial>()
+    private lateinit var sizeRadioGroup: RadioGroup
+    private lateinit var transparencySeekBar: SeekBar
+    private lateinit var transparencyText: TextView
+    private lateinit var colorSpinner: Spinner
+    private lateinit var autoHideSwitch: SwitchMaterial
+    private lateinit var autoHideDelaySeekBar: SeekBar
+    private lateinit var autoHideDelayText: TextView
+    private lateinit var gesturesSwitch: SwitchMaterial
+    private lateinit var statsText: TextView
+    private lateinit var resetStatsButton: Button
+    private lateinit var managePermissionsButton: Button
+    private lateinit var positionButtonsLayout: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        // Enable back button in action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Settings"
 
-        // Initialize permission helper
+        prefsManager = PreferencesManager(this)
+        usageStatsManager = UsageStatsManager(this)
         permissionHelper = PermissionHelper(this)
 
-        // Initialize UI elements
         initializeViews()
-
-        // Set up button click listeners
-        setupButtons()
-
-        // Update permission status display
-        updatePermissionStatus()
+        loadSettings()
+        setupListeners()
+        updateStatistics()
     }
 
-    /**
-     * onResume - Called when activity becomes visible
-     * Update status in case permissions changed in background
-     */
-    override fun onResume() {
-        super.onResume()
-        updatePermissionStatus()
-    }
-
-    /**
-     * Initialize all UI elements
-     */
     private fun initializeViews() {
-        overlayStatusText = findViewById(R.id.overlayStatusText)
-        deviceAdminStatusText = findViewById(R.id.deviceAdminStatusText)
-        notificationStatusText = findViewById(R.id.notificationStatusText)
+        buttonSwitches[PreferencesManager.ButtonType.VOLUME_UP] = findViewById(R.id.switchVolumeUp)
+        buttonSwitches[PreferencesManager.ButtonType.VOLUME_DOWN] = findViewById(R.id.switchVolumeDown)
+        buttonSwitches[PreferencesManager.ButtonType.MUTE] = findViewById(R.id.switchMute)
+        buttonSwitches[PreferencesManager.ButtonType.LOCK] = findViewById(R.id.switchLock)
+        buttonSwitches[PreferencesManager.ButtonType.BRIGHTNESS_UP] = findViewById(R.id.switchBrightnessUp)
+        buttonSwitches[PreferencesManager.ButtonType.BRIGHTNESS_DOWN] = findViewById(R.id.switchBrightnessDown)
+        buttonSwitches[PreferencesManager.ButtonType.HOME] = findViewById(R.id.switchHome)
+        buttonSwitches[PreferencesManager.ButtonType.RECENT_APPS] = findViewById(R.id.switchRecentApps)
+        buttonSwitches[PreferencesManager.ButtonType.FLASHLIGHT] = findViewById(R.id.switchFlashlight)
+        buttonSwitches[PreferencesManager.ButtonType.WIFI] = findViewById(R.id.switchWifi)
+        buttonSwitches[PreferencesManager.ButtonType.BLUETOOTH] = findViewById(R.id.switchBluetooth)
+
+        sizeRadioGroup = findViewById(R.id.sizeRadioGroup)
+        transparencySeekBar = findViewById(R.id.transparencySeekBar)
+        transparencyText = findViewById(R.id.transparencyText)
+        colorSpinner = findViewById(R.id.colorSpinner)
+        autoHideSwitch = findViewById(R.id.autoHideSwitch)
+        autoHideDelaySeekBar = findViewById(R.id.autoHideDelaySeekBar)
+        autoHideDelayText = findViewById(R.id.autoHideDelayText)
+        gesturesSwitch = findViewById(R.id.gesturesSwitch)
+        statsText = findViewById(R.id.statsText)
+        resetStatsButton = findViewById(R.id.resetStatsButton)
         managePermissionsButton = findViewById(R.id.managePermissionsButton)
+        positionButtonsLayout = findViewById(R.id.positionButtonsLayout)
     }
 
-    /**
-     * Set up button click listeners
-     */
-    private fun setupButtons() {
-        // Manage Permissions Button - opens app settings
+    private fun loadSettings() {
+        buttonSwitches.forEach { (type, switch) ->
+            switch.isChecked = prefsManager.isButtonEnabled(type)
+        }
+
+        when (prefsManager.getButtonSize()) {
+            0 -> findViewById<RadioButton>(R.id.sizeSmall).isChecked = true
+            1 -> findViewById<RadioButton>(R.id.sizeMedium).isChecked = true
+            2 -> findViewById<RadioButton>(R.id.sizeLarge).isChecked = true
+        }
+
+        transparencySeekBar.progress = prefsManager.getTransparency()
+        transparencyText.text = "${prefsManager.getTransparency()}%"
+
+        colorSpinner.setSelection(prefsManager.getColorTheme())
+
+        autoHideSwitch.isChecked = prefsManager.isAutoHideEnabled()
+        val delaySeconds = (prefsManager.getAutoHideDelay() / 1000).toInt()
+        autoHideDelaySeekBar.progress = delaySeconds
+        autoHideDelayText.text = "$delaySeconds seconds"
+        autoHideDelaySeekBar.isEnabled = autoHideSwitch.isChecked
+
+        gesturesSwitch.isChecked = prefsManager.isGesturesEnabled()
+    }
+
+    private fun setupListeners() {
+        // FIXED: Settings now apply in real-time!
+        buttonSwitches.forEach { (type, switch) ->
+            switch.setOnCheckedChangeListener { _, isChecked ->
+                prefsManager.setButtonEnabled(type, isChecked)
+                notifySettingsChanged() // Auto-apply!
+            }
+        }
+
+        sizeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val size = when (checkedId) {
+                R.id.sizeSmall -> 0
+                R.id.sizeLarge -> 2
+                else -> 1
+            }
+            prefsManager.setButtonSize(size)
+            notifySettingsChanged() // Auto-apply!
+        }
+
+        transparencySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val value = progress.coerceIn(50, 100)
+                transparencyText.text = "$value%"
+                if (fromUser) {
+                    prefsManager.setTransparency(value)
+                    notifySettingsChanged() // Auto-apply!
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        colorSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: android.view.View?, position: Int, id: Long) {
+                prefsManager.setColorTheme(position)
+                notifySettingsChanged() // Auto-apply!
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        autoHideSwitch.setOnCheckedChangeListener { _, isChecked ->
+            prefsManager.setAutoHideEnabled(isChecked)
+            autoHideDelaySeekBar.isEnabled = isChecked
+            notifySettingsChanged() // Auto-apply!
+        }
+
+        autoHideDelaySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                val seconds = progress.coerceIn(3, 60)
+                autoHideDelayText.text = "$seconds seconds"
+                if (fromUser) {
+                    prefsManager.setAutoHideDelay(seconds * 1000L)
+                    notifySettingsChanged() // Auto-apply!
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        gesturesSwitch.setOnCheckedChangeListener { _, isChecked ->
+            prefsManager.setGesturesEnabled(isChecked)
+            notifySettingsChanged() // Auto-apply!
+        }
+
+        resetStatsButton.setOnClickListener {
+            usageStatsManager.resetStats()
+            updateStatistics()
+            Toast.makeText(this, "Statistics reset", Toast.LENGTH_SHORT).show()
+        }
+
         managePermissionsButton.setOnClickListener {
-            permissionHelper.openAppSettings()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            } else {
+                permissionHelper.openAppSettings()
+            }
+        }
+
+        setupPositionPresets()
+    }
+
+    private fun setupPositionPresets() {
+        findViewById<Button>(R.id.positionTopLeft).setOnClickListener {
+            prefsManager.setPosition(50, 100)
+            notifySettingsChanged()
+        }
+        findViewById<Button>(R.id.positionTopRight).setOnClickListener {
+            val screenWidth = resources.displayMetrics.widthPixels
+            prefsManager.setPosition(screenWidth - 150, 100)
+            notifySettingsChanged()
+        }
+        findViewById<Button>(R.id.positionBottomLeft).setOnClickListener {
+            val screenHeight = resources.displayMetrics.heightPixels
+            prefsManager.setPosition(50, screenHeight - 500)
+            notifySettingsChanged()
+        }
+        findViewById<Button>(R.id.positionBottomRight).setOnClickListener {
+            val screenWidth = resources.displayMetrics.widthPixels
+            val screenHeight = resources.displayMetrics.heightPixels
+            prefsManager.setPosition(screenWidth - 150, screenHeight - 500)
+            notifySettingsChanged()
+        }
+        findViewById<Button>(R.id.positionCenterLeft).setOnClickListener {
+            val screenHeight = resources.displayMetrics.heightPixels
+            prefsManager.setPosition(50, screenHeight / 2)
+            notifySettingsChanged()
+        }
+        findViewById<Button>(R.id.positionCenterRight).setOnClickListener {
+            val screenWidth = resources.displayMetrics.widthPixels
+            val screenHeight = resources.displayMetrics.heightPixels
+            prefsManager.setPosition(screenWidth - 150, screenHeight / 2)
+            notifySettingsChanged()
         }
     }
 
     /**
-     * Update the permission status display
-     * Shows whether each permission is granted or not
+     * FIXED: Notify service of settings changes for real-time update
      */
-    private fun updatePermissionStatus() {
-        // Overlay Permission Status
-        val overlayGranted = permissionHelper.hasOverlayPermission()
-        overlayStatusText.text = buildString {
-            append("Overlay Permission: ")
-            append(if (overlayGranted) "✓ Granted" else "✗ Not Granted")
-            append("\n\n")
-            append("Allows floating buttons to appear over other apps.")
-        }
-        overlayStatusText.setTextColor(
-            if (overlayGranted) getColor(R.color.green_500)
-            else getColor(R.color.red_500)
-        )
+    private fun notifySettingsChanged() {
+        val intent = Intent(OverlayService.ACTION_SETTINGS_CHANGED)
+        sendBroadcast(intent)
 
-        // Device Admin Status
-        val deviceAdminEnabled = permissionHelper.isDeviceAdminEnabled()
-        deviceAdminStatusText.text = buildString {
-            append("Device Administrator: ")
-            append(if (deviceAdminEnabled) "✓ Enabled" else "✗ Not Enabled")
-            append("\n\n")
-            append("Required to lock the screen with the floating button.")
-        }
-        deviceAdminStatusText.setTextColor(
-            if (deviceAdminEnabled) getColor(R.color.green_500)
-            else getColor(R.color.orange_500)
-        )
-
-        // Notification Permission Status
-        val notificationGranted = permissionHelper.hasNotificationPermission()
-        notificationStatusText.text = buildString {
-            append("Notification Permission: ")
-            append(if (notificationGranted) "✓ Granted" else "✗ Not Granted")
-            append("\n\n")
-            append("Required for the service notification.")
-        }
-        notificationStatusText.setTextColor(
-            if (notificationGranted) getColor(R.color.green_500)
-            else getColor(R.color.orange_500)
-        )
+        Toast.makeText(
+            this,
+            "Settings applied ✓",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
-    /**
-     * Handle action bar back button press
-     * Returns to previous screen (MainActivity)
-     */
+    private fun updateStatistics() {
+        val summary = usageStatsManager.getStatsSummary()
+        statsText.text = summary
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

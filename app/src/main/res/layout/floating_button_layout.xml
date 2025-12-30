@@ -1,80 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    floating_button_layout.xml - Layout for the floating overlay buttons
-
-    This defines the appearance of the floating buttons that appear
-    over all other apps. Contains 4 buttons arranged vertically:
-    - Volume Up
-    - Volume Down
-    - Mute
-    - Lock Screen
-
-    For beginners: This is the actual floating widget users will see
-    and interact with on their screen.
+    FINAL floating_button_layout.xml
+    - Scrollable in landscape
+    - Proper ScrollView ID
+    - fillViewport enabled
+    - Stable for overlay + drag
 -->
-<LinearLayout
+
+<ScrollView
+    android:id="@+id/scrollView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:maxHeight="600dp"
     android:background="@drawable/button_background"
+    android:elevation="16dp"
     android:padding="8dp"
-    android:elevation="16dp">
+    android:scrollbars="vertical"
+    android:fadeScrollbars="false"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideOverlay"
+    android:overScrollMode="never">
 
-    <!-- Volume Up Button -->
-    <ImageButton
-        android:id="@+id/volumeUpButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_background"
-        android:contentDescription="@string/volume_up"
-        android:elevation="8dp"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_volume_up"
-        app:tint="@color/white" />
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipToPadding="false">
 
-    <!-- Volume Down Button -->
-    <ImageButton
-        android:id="@+id/volumeDownButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_background"
-        android:contentDescription="@string/volume_down"
-        android:elevation="8dp"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_volume_down"
-        app:tint="@color/white" />
+        <!-- Collapse / Drag Handle -->
+        <ImageButton
+            android:id="@+id/collapseButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/collapse"
+            android:elevation="10dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_menu"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="@color/white" />
 
-    <!-- Mute Button -->
-    <ImageButton
-        android:id="@+id/muteButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_background"
-        android:contentDescription="@string/mute"
-        android:elevation="8dp"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_volume_mute"
-        app:tint="@color/white" />
+        <!-- Volume Up -->
+        <ImageButton
+            android:id="@+id/volumeUpButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/volume_up"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume_up"
+            app:tint="@color/white" />
 
-    <!-- Lock Screen Button -->
-    <ImageButton
-        android:id="@+id/lockButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:background="@drawable/button_background"
-        android:contentDescription="@string/lock_screen"
-        android:elevation="8dp"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_lock"
-        app:tint="@color/white" />
+        <!-- Volume Down -->
+        <ImageButton
+            android:id="@+id/volumeDownButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/volume_down"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume_down"
+            app:tint="@color/white" />
 
-</LinearLayout>
+        <!-- Mute -->
+        <ImageButton
+            android:id="@+id/muteButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/mute"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_volume_mute"
+            app:tint="@color/white" />
+
+        <!-- Lock -->
+        <ImageButton
+            android:id="@+id/lockButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/lock_screen"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_lock"
+            app:tint="@color/white" />
+
+        <!-- Brightness Up -->
+        <ImageButton
+            android:id="@+id/brightnessUpButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/brightness_up"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_brightness_up"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- Brightness Down -->
+        <ImageButton
+            android:id="@+id/brightnessDownButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/brightness_down"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_brightness_down"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- Home -->
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/home"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- Recent Apps -->
+        <ImageButton
+            android:id="@+id/recentAppsButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/recent_apps"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_recent_apps"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- Flashlight -->
+        <ImageButton
+            android:id="@+id/flashlightButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/flashlight"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_flashlight"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- WiFi -->
+        <ImageButton
+            android:id="@+id/wifiButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/wifi"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_wifi"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <!-- Bluetooth -->
+        <ImageButton
+            android:id="@+id/bluetoothButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/button_background"
+            android:contentDescription="@string/bluetooth"
+            android:elevation="8dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_bluetooth"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+</ScrollView>

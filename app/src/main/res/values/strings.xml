@@ -60,4 +60,43 @@
     <string name="device_admin_not_enabled">Device admin not enabled. Screen lock button won\'t work.</string>
     <string name="screen_lock_failed">Failed to lock screen</string>
     <string name="volume_change_failed">Failed to change volume</string>
+    <!-- NEW STRINGS - Add these to your existing strings.xml -->
+
+    <!-- New Buttons -->
+    <string name="brightness_up">Brightness Up</string>
+    <string name="brightness_down">Brightness Down</string>
+    <string name="home">Home</string>
+    <string name="recent_apps">Recent Apps</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="wifi">WiFi</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="menu">Menu</string>
+    <string name="collapse">Collapse</string>
+
+    <!-- Settings -->
+    <string name="button_customization">Button Customization</string>
+    <string name="appearance">Appearance</string>
+    <string name="behavior">Behavior</string>
+    <string name="statistics">Statistics</string>
+    <string name="size_small">Small</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large">Large</string>
+    <string name="transparency">Transparency</string>
+    <string name="color_theme">Color Theme</string>
+    <string name="auto_hide">Auto-Hide</string>
+    <string name="auto_hide_delay">Hide after inactivity</string>
+    <string name="enable_gestures">Enable Gestures</string>
+    <string name="gestures_desc">Swipe up/down for volume, double-tap to expand</string>
+    <string name="position_presets">Quick Positions</string>
+    <string name="reset_statistics">Reset Statistics</string>
+    <string name="quick_tile_label">Floating Buttons</string>
+
+    <!-- Color themes array -->
+    <string-array name="color_themes">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Dark Gray</item>
+    </string-array>
 </resources>

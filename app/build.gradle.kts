@@ -76,6 +76,7 @@ dependencies {
 
     // Coroutines - For asynchronous programming
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Testing libraries (optional, for future unit tests)
     testImplementation("junit:junit:4.13.2")

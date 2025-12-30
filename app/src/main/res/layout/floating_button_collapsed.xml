@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    floating_button_collapsed.xml
+    - Drag from anywhere (FrameLayout handles touch)
+    - Menu button still clickable
+    - Stable for overlay WindowManager drag
+-->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/collapsedRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="16dp">
+
+    <!-- Menu / Expand Button -->
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/button_background"
+        android:contentDescription="@string/menu"
+        android:elevation="8dp"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_menu"
+        android:clickable="true"
+        android:focusable="false"
+        app:tint="@color/white" />
+
+</FrameLayout>
